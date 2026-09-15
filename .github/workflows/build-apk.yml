@@ -43,17 +43,17 @@ jobs:
         run: npm test
 
       - name: Expo Prebuild for Android
-        run: npx expo prebuild --platform android --no-install
+        run: npx expo prebuild --platform android --non-interactive
 
-      - name: Build Android Release APK
+      - name: Build Android Debug APK
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleRelease
+          ./gradlew assembleDebug
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: sql-student-studio-apk
-          path: android/app/build/outputs/apk/release/*.apk
+          path: android/app/build/outputs/apk/debug/*.apk
           retention-days: 30
